@@ -558,14 +558,14 @@ export const contentSlice = createSlice({
             );
         });
 
-        const newWatchHistoryContent = state?.watchHistoryContent.map(
+        const newWatchHistoryContent = state.watchHistoryContent.map(
           (content) =>
             content.contentId === likedContent.contentId
               ? likedContent
               : content
         );
 
-        const newWatchListContent = state?.watchListContent.map((content) =>
+        const newWatchListContent = state.watchListContent.map((content) =>
           content.contentId === likedContent.contentId ? likedContent : content
         );
 
