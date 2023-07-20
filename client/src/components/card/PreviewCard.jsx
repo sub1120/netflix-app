@@ -110,7 +110,7 @@ const PreviewCard = ({
       </div>
 
       {/* preview details */}
-      <div className="space-y-4 p-4">
+      <div className="space-y-4 p-3 md:p-4">
         <div className="flex justify-between">
           <div className="flex gap-2">
             <button
