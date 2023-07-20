@@ -5,7 +5,7 @@ import PreviewCard from "./card/PreviewCard";
 
 const ContentRow = ({ heading, loading, content, toWatch = false }) => {
   return (
-    <div className="bg-netflix-blue pt-4 text-white">
+    <div className="bg-netflix-blue pt-2 text-white md:pt-3 lg:pt-4">
       <div className="px-4 md:px-8">
         {loading ? (
           <RowContentShimmer />
@@ -13,7 +13,9 @@ const ContentRow = ({ heading, loading, content, toWatch = false }) => {
           content &&
           content.length !== 0 && (
             <>
-              <h3 className="py-4 text-lg md:text-xl lg:text-2xl">{heading}</h3>
+              <h3 className="py-2 text-lg md:py-3 md:text-xl lg:py-4 lg:text-2xl">
+                {heading}
+              </h3>
               <div className="space-y-5">
                 <Crousal>
                   {Array.from(content).map((item) => {

@@ -93,7 +93,7 @@ const PreviewCard = ({
 
   return (
     <div
-      className="my-8 w-48 scale-100 rounded bg-netflix-black drop-shadow-lg transition duration-300 ease-in-out hover:z-10 hover:ml-4 hover:scale-125 hover:opacity-100 md:w-64"
+      className="my-4 w-48 scale-100 rounded bg-netflix-black drop-shadow-lg transition duration-300 ease-in-out hover:z-10 hover:ml-4 hover:scale-125 hover:opacity-100 md:my-6 md:w-64 lg:my-8"
       onMouseLeave={() => pauseVideo()}
       onMouseEnter={() => playVideo()}
     >

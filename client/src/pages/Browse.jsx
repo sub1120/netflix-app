@@ -82,7 +82,7 @@ const Browse = () => {
           <div>
             {/* hero container */}
             <div className="relative">
-              <div className="h-[300px] w-full md:h-[400px] lg:h-[800px]">
+              <div className="h-[200px] w-full md:h-[400px] lg:h-[800px]">
                 {loading ? (
                   <VideoShimmer />
                 ) : (
@@ -92,7 +92,7 @@ const Browse = () => {
                       {/* hero video */}
                       <div className="absolute -bottom-1 h-[50px] w-full bg-gradient-to-b from-netflix-blue/0 to-netflix-blue/100 md:h-[100px] lg:h-[200px]"></div>
                       <video
-                        className="mx-auto h-[300px] w-full object-cover md:h-[400px] lg:h-[800px]"
+                        className="mx-auto h-[200px] w-full object-cover md:h-[400px] lg:h-[800px]"
                         src={allContent[0].trailerUrl}
                         poster={allContent[0].thumbnailUrl}
                         autoPlay={true}

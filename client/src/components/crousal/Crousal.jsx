@@ -15,7 +15,7 @@ const Crousal = ({ children }) => {
   return (
     <div
       ref={ref}
-      className="flex-start no-scrollbar flex items-center gap-4 overflow-x-scroll scroll-smooth"
+      className="flex-start no-scrollbar flex items-center gap-3 overflow-x-scroll scroll-smooth md:gap-4"
     >
       {/* left arrow */}
       <button
