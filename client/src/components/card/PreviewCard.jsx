@@ -113,51 +113,43 @@ const PreviewCard = ({
       <div className="space-y-4 p-4">
         <div className="flex justify-between">
           <div className="flex gap-2">
-            <div className="cursor-pointer">
-              <button
-                onClick={() => handlePlay(contentId)}
-                className="cursor-pointer rounded-full border-2 border-white p-[0.35rem]"
-              >
-                <BsFillPlayFill className="text-xl" />
-              </button>
-            </div>
-            <div>
-              <button
-                onClick={likeContentHanlder}
-                className="cursor-pointer rounded-full border-2 border-white p-[0.35rem]"
-                disabled={likeDisLikeLoading}
-              >
-                <AiFillLike
-                  className={`${
-                    isLiked
-                      ? "text-green-500"
-                      : "text-white hover:text-green-500"
-                  } text-xl`}
-                />
-              </button>
-              <button
-                onClick={dislikeContentHanlder}
-                className="cursor-pointer rounded-full border-2 border-white p-[0.35rem]"
-                disabled={likeDisLikeLoading}
-              >
-                <AiFillDislike
-                  className={`${
-                    isDisliked
-                      ? "text-red-500"
-                      : "text-white hover:text-red-500"
-                  } text-xl`}
-                />
-              </button>
-            </div>
+            <button
+              onClick={() => handlePlay(contentId)}
+              className="cursor-pointer rounded-full border-2 border-white p-[0.35rem] "
+            >
+              <BsFillPlayFill className="text-md md:text-lg lg:text-xl" />
+            </button>
+            <button
+              onClick={likeContentHanlder}
+              className="cursor-pointer rounded-full border-2 border-white p-[0.35rem]"
+              disabled={likeDisLikeLoading}
+            >
+              <AiFillLike
+                className={`${
+                  isLiked ? "text-green-500" : "text-white hover:text-green-500"
+                } text-md md:text-lg lg:text-xl `}
+              />
+            </button>
+            <button
+              onClick={dislikeContentHanlder}
+              className="hidden cursor-pointer rounded-full border-2 border-white p-[0.35rem] md:block"
+              disabled={likeDisLikeLoading}
+            >
+              <AiFillDislike
+                className={`${
+                  isDisliked ? "text-red-500" : "text-white hover:text-red-500"
+                } text-md md:text-lg lg:text-xl`}
+              />
+            </button>
             <button
               onClick={watchListHandler}
               disabled={watchHistoryLoading}
               className="cursor-pointer rounded-full border-2 border-white p-[0.35rem]"
             >
               {toWatch ? (
-                <AiOutlineMinus className="text-xl" />
+                <AiOutlineMinus className="text-md md:text-lg lg:text-xl" />
               ) : (
-                <AiOutlinePlus className="text-xl" />
+                <AiOutlinePlus className="text-md md:text-lg lg:text-xl" />
               )}
             </button>
           </div>
@@ -165,20 +157,24 @@ const PreviewCard = ({
             onClick={openCloseDetails}
             className="cursor-pointer rounded-full border-2 border-white p-[0.35rem]"
           >
-            <AiOutlineArrowDown className="text-xl" />
+            <AiOutlineArrowDown className="text-md md:text-lg lg:text-xl" />
           </button>
         </div>
 
-        <div className="flex items-center gap-2">
-          <div className="font-semibold text-green-600">94% Matched</div>
-          <div className="border-[1px] border-white px-2 text-sm text-white">
+        <div className="flex flex-wrap items-center gap-2">
+          <div className="text-xs font-semibold text-green-600  md:text-sm">
+            94% Matched
+          </div>
+          <div className="border-[1px] border-white px-1 text-xs text-white md:text-sm">
             {rating}
           </div>
-          <div className="h-fit rounded border-[1px] border-white px-1 text-xs text-white">
+          <div className="h-fit rounded border-[1px] border-white px-1 text-xs text-white md:text-sm">
             HD
           </div>
         </div>
-        <div className="text-white">{geners.join(" . ")}</div>
+        <div className="lg:text-md text-xs text-white md:text-sm">
+          {geners.join(" . ")}
+        </div>
       </div>
 
       {/* modal for video description */}

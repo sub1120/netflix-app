@@ -13,7 +13,7 @@ const ContentRow = ({ heading, loading, content, toWatch = false }) => {
           content &&
           content.length !== 0 && (
             <>
-              <h3 className="py-4">{heading}</h3>
+              <h3 className="py-4 text-lg md:text-xl lg:text-2xl">{heading}</h3>
               <div className="space-y-5">
                 <Crousal>
                   {Array.from(content).map((item) => {
