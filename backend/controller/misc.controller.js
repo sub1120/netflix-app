@@ -1,7 +1,6 @@
-const razorpay = require("../config/razorpay.config.js");
-const asyncHandler = require("../middlewares/asyncHandler.js");
-const contentModel = require("../models/content.model.js");
-const userModel = require("../models/user.model.js");
+const asyncHandler = require("../middleware/asyncHandler.js");
+const contentModel = require("../model/content.schema.js");
+const userModel = require("../model/user.schema.js");
 
 const plans = ["PREMIUM", "STANDARD", "BASIC", "MOBILE", "NONE"];
 
@@ -18,17 +17,16 @@ const getUsersStatistics = asyncHandler(async (req, res, next) => {
   const data = {
     plans: {},
   };
-  // total user count
+
   data.usersCount = users.length;
 
   const usersWithActiveSubscription = users.filter((user) => {
     return user?.subscription?.status === "active";
   });
 
-  // active subscription
   data.usersCountWithActiveSubscription = usersWithActiveSubscription.length;
 
-  // calculate for total, for specific plan
+  // TODO: Add check for subscription active and user plan is "NONE"
   for (let user of users) {
     for (let plan of plans) {
       if (user.plan === plan) {
@@ -119,7 +117,8 @@ const getPaymentStatistics = asyncHandler(async (req, res, next) => {
 
   const from = req.query.startDate || startDate;
   const to = req.query.endDate || endDate;
-  // call razorpay instant
+
+  // try {
   const result = await razorpay.subscriptions.all({
     from,
     to,

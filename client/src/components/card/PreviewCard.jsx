@@ -33,7 +33,7 @@ const PreviewCard = ({
   isDisliked,
   releaseYear,
   contentDuration,
-  watch,
+  toWatch,
 }) => {
   const userId = useSelector((state) => state.auth.userData._id);
   const { likeDisLikeLoading, watchHistoryLoading } = useSelector(
@@ -44,16 +44,20 @@ const PreviewCard = ({
   const navigate = useNavigate();
   const videoRef = useRef(null);
 
-  function playPauseMedia() {
+  const playVideo = () => {
     const media = videoRef.current;
-
     if (media.paused) {
       media.play();
-    } else {
+    }
+  };
+
+  const pauseVideo = () => {
+    const media = videoRef.current;
+    if (!media.paused) {
       media.pause();
       media.load();
     }
-  }
+  };
 
   const openCloseDetails = () => {
     setIsOpenDetatils(!isOpenDetails);
@@ -74,7 +78,7 @@ const PreviewCard = ({
   };
 
   const watchListHandler = () => {
-    if (watch) {
+    if (toWatch) {
       dispatch(removeContentFromWatchList({ contentId }));
     } else {
       dispatch(addContentToWatchList({ contentId }));
@@ -89,9 +93,9 @@ const PreviewCard = ({
 
   return (
     <div
-      className="my-8 w-48 scale-100 rounded bg-netflix-black drop-shadow-lg transition duration-300 ease-in-out hover:z-10 hover:ml-4 hover:scale-125 hover:opacity-100 md:w-64"
-      onMouseLeave={() => playPauseMedia()}
-      onMouseEnter={() => playPauseMedia()}
+      className="my-4 w-48 scale-100 rounded bg-netflix-black drop-shadow-lg transition duration-300 ease-in-out hover:z-10 hover:ml-4 hover:scale-125 hover:opacity-100 md:my-6 md:w-64 lg:my-8"
+      onMouseLeave={() => pauseVideo()}
+      onMouseEnter={() => playVideo()}
     >
       {/* preview video*/}
       <div className="w-48 md:w-64">
@@ -106,17 +110,15 @@ const PreviewCard = ({
       </div>
 
       {/* preview details */}
-      <div className="space-y-4 p-4">
+      <div className="space-y-4 p-3 md:p-4">
         <div className="flex justify-between">
           <div className="flex gap-2">
-            <div className="cursor-pointer">
-              <button
-                onClick={() => handlePlay(contentId)}
-                className="cursor-pointer rounded-full border-2 border-white p-[0.35rem]"
-              >
-                <BsFillPlayFill className="text-xl" />
-              </button>
-            </div>
+            <button
+              onClick={() => handlePlay(contentId)}
+              className="cursor-pointer rounded-full border-2 border-white p-[0.35rem] "
+            >
+              <BsFillPlayFill className="text-md md:text-lg lg:text-xl" />
+            </button>
             <button
               onClick={likeContentHanlder}
               className="cursor-pointer rounded-full border-2 border-white p-[0.35rem]"
@@ -125,18 +127,18 @@ const PreviewCard = ({
               <AiFillLike
                 className={`${
                   isLiked ? "text-green-500" : "text-white hover:text-green-500"
-                } text-xl`}
+                } text-md md:text-lg lg:text-xl `}
               />
             </button>
             <button
               onClick={dislikeContentHanlder}
-              className="cursor-pointer rounded-full border-2 border-white p-[0.35rem]"
+              className="hidden cursor-pointer rounded-full border-2 border-white p-[0.35rem] md:block"
               disabled={likeDisLikeLoading}
             >
               <AiFillDislike
                 className={`${
                   isDisliked ? "text-red-500" : "text-white hover:text-red-500"
-                } text-xl`}
+                } text-md md:text-lg lg:text-xl`}
               />
             </button>
             <button
@@ -144,10 +146,10 @@ const PreviewCard = ({
               disabled={watchHistoryLoading}
               className="cursor-pointer rounded-full border-2 border-white p-[0.35rem]"
             >
-              {watch ? (
-                <AiOutlineMinus className="text-xl" />
+              {toWatch ? (
+                <AiOutlineMinus className="text-md md:text-lg lg:text-xl" />
               ) : (
-                <AiOutlinePlus className="text-xl" />
+                <AiOutlinePlus className="text-md md:text-lg lg:text-xl" />
               )}
             </button>
           </div>
@@ -155,20 +157,24 @@ const PreviewCard = ({
             onClick={openCloseDetails}
             className="cursor-pointer rounded-full border-2 border-white p-[0.35rem]"
           >
-            <AiOutlineArrowDown className="text-xl" />
+            <AiOutlineArrowDown className="text-md md:text-lg lg:text-xl" />
           </button>
         </div>
 
-        <div className="flex items-center gap-2">
-          <div className="font-semibold text-green-600">94% Matched</div>
-          <div className="border-[1px] border-white px-2 text-sm text-white">
+        <div className="flex flex-wrap items-center gap-2">
+          <div className="text-xs font-semibold text-green-600  md:text-sm">
+            94% Matched
+          </div>
+          <div className="border-[1px] border-white px-1 text-xs text-white md:text-sm">
             {rating}
           </div>
-          <div className="h-fit rounded border-[1px] border-white px-1 text-xs text-white">
+          <div className="h-fit rounded border-[1px] border-white px-1 text-xs text-white md:text-sm">
             HD
           </div>
         </div>
-        <div className="text-white">{geners.join(" . ")}</div>
+        <div className="lg:text-md text-xs text-white md:text-sm">
+          {geners.join(" . ")}
+        </div>
       </div>
 
       {/* modal for video description */}
